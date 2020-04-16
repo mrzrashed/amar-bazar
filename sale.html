@@ -160,27 +160,27 @@
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix" onclick="start('first_name')">keyboard_voice</i>
+            <i class="material-icons prefix" id="first_name_icon" onclick="start('first_name','first_name_icon')">keyboard_voice</i>
             <input id="first_name" type="text" class="validate">
             <label for="first_name">পণ্যের নাম </label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix" onclick="start('last_name')">keyboard_voice</i>
+            <i class="material-icons prefix" id="last_name_icon" onclick="start('last_name','last_name_icon')">keyboard_voice</i>
             <input id="last_name" type="text" class="validate">
             <label for="last_name">বিক্রয় মুল্য</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix" onclick="start('last_nam')">keyboard_voice</i>
+            <i class="material-icons prefix" id="last_nam_icon" onclick="start('last_nam','last_nam_icon')">keyboard_voice</i>
             <input id="last_nam" type="text" class="validate">
             <label for="last_nam">স্টক পরিমাণ</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix" onclick="start('last_na')">keyboard_voice</i>
+            <i class="material-icons prefix" id="last_na_icon" onclick="start('last_na','last_na_icon')">keyboard_voice</i>
             <input id="last_na" type="text" class="validate">
             <label for="last_na">পরিবহণ খরচ</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix" onclick="start('last_n')">keyboard_voice</i>
+            <i class="material-icons prefix" id="last_n_icon" onclick="start('last_n','last_n_icon')">keyboard_voice</i>
             <input id="last_n" type="text" class="validate">
             <label for="last_n">সর্বনিম্ন বিক্রয় পরিমাণ</label>
           </div>
@@ -248,11 +248,11 @@
     recognition.continuous = true;
 
     //recognition.interimResults = true;
-    function start(field_name) {
+    function start(field_name,icon) {
+      document.getElementById(icon).innerHTML = "record_voice_over";
 
       recognition.onresult = function (event) {
-        // console.log(event);
-        // console.log(field_name);
+        console.log(icon);
         var output = document.getElementById(field_name);
         output.value = "";
         const current = event.resultIndex;
@@ -261,6 +261,8 @@
         recognition.abort();
 
         recognition.stop();
+        document.getElementById(icon).innerHTML = "keyboard_voice";
+
       }
       recognition.start();
 
